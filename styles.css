@@ -1,0 +1,351 @@
+:root {
+    /* Color Variables */
+    --primary-color: #4A90E2; /* Main color used throughout the site */
+    --secondary-color: #FF6B6B; /* Accent color for specific elements */
+    --background-gradient: linear-gradient(to right, #83a4d4, #b6fbff); /* Background gradient */
+    --card-bg-color: #ffffff; /* Background color for cards */
+    --text-color: #333; /* Primary text color */
+    --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Box shadow for elements */
+    --button-hover-color: #3b7bbf; /* Color for button hover effect */
+    --input-focus-color: #4CAF50; /* Border color for focused input fields */
+}
+
+body {
+    /* General Body Styling */
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(45deg, #f6f694, #2e82c6);
+    background-size: 400% 400%; /* Kích thước lớn hơn để hiệu ứng chuyển động rõ hơn */
+    animation: gradient 5s ease infinite;
+    color: var(--text-color); /* Text color */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Full viewport height */
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+    
+
+header {
+    /* Header Styling */
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+    box-shadow: var(--box-shadow); /* Shadow effect */
+    padding: 20px 40px; /* Padding inside header */
+    display: flex;
+    justify-content: space-between; /* Space between header elements */
+    align-items: center; /* Align items vertically */
+    position: fixed; /* Fixed position */
+    top: 0;
+    width: 100%; /* Full width */
+    z-index: 1000; /* High z-index to stay on top */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+.header-content {
+    /* Centering the <h1> */
+    display: flex;
+    justify-content: center;
+    flex-grow: 1; /* Allow to grow and take up space */
+}
+
+h1 {
+    /* Main Heading Styling */
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-color); /* Primary color for heading */
+    margin: 0;
+}
+
+.login-button {
+    /* Login Button Styling */
+    background-color: var(--primary-color); /* Background color */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Padding inside button */
+    border: none; /* Remove default border */
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+    font-size: 16px; /* Font size */
+    transition: background-color 0.3s ease; /* Smooth color transition */
+    /* Position the login button */
+    position: relative;
+    margin-left: 20px; /* Space from the edge */
+}
+
+.login-button:hover {
+    /* Hover Effect for Button */
+    background-color: var(--button-hover-color); /* Darker background on hover */
+}
+
+.content {
+    /* Content Area Styling */
+    display: flex;
+    flex-wrap: wrap; /* Wrap content for responsiveness */
+    justify-content: center; /* Center align content */
+    gap: 30px; /* Space between content blocks */
+    margin-top: 100px; /* Margin to push content below header */
+    padding: 20px;
+}
+
+.block {
+    /* Card Block Styling */
+    background-color: var(--card-bg-color); /* Card background */
+    box-shadow: var(--box-shadow); /* Shadow effect */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Padding inside card */
+    width: 300px; /* Fixed width */
+    transition: transform 0.3s ease-in-out; /* Smooth transform effect */
+    text-align: center; /* Center align text */
+}
+
+.block:hover {
+    /* Hover Effect for Card Block */
+    transform: translateY(-10px); /* Lift card on hover */
+}
+
+h3 {
+    /* Subheading Styling */
+    font-size: 20px;
+    color: var(--primary-color); /* Primary color for subheading */
+    margin-bottom: 20px; /* Margin below heading */
+}
+
+.button {
+    /* Button Styling */
+    background-color: var(--primary-color); /* Background color */
+    color: white; /* Text color */
+    padding: 10px; /* Padding inside button */
+    border: none; /* Remove default border */
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+    width: 100%; /* Full width */
+    font-size: 16px; /* Font size */
+    margin-top: 10px; /* Margin on top */
+    transition: background-color 0.3s ease; /* Smooth color transition */
+}
+
+.button:hover {
+    /* Hover Effect for Button */
+    background-color: var(--button-hover-color); /* Darker background on hover */
+}
+
+.button-off {
+    /* Button for 'Off' State */
+    background-color: var(--secondary-color); /* Secondary color */
+}
+
+.button-off:hover {
+    /* Hover Effect for 'Off' State Button */
+    background-color: #ff4c4c; /* Darker red on hover */
+}
+
+input[type="text"], input[type="range"] {
+    /* Input Fields Styling */
+    width: 100%; /* Full width */
+    padding: 10px; /* Padding inside input fields */
+    margin: 10px 0; /* Margin above and below */
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 8px; /* Rounded corners */
+}
+
+input[type="text"]:focus, input[type="range"]:focus {
+    /* Focus Effect for Input Fields */
+    border-color: var(--input-focus-color); /* Change border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+.status {
+    /* Status Text Styling */
+    margin-top: 15px; /* Margin on top */
+    font-size: 16px; /* Font size */
+    font-weight: bold; /* Bold text */
+}
+
+footer {
+    /* Footer Styling */
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+    padding: 25px; /* Padding inside footer */
+    text-align: center; /* Center align text */
+    margin-top: auto; /* Push footer to the bottom */
+}
+
+.footer-card {
+    /* Card in Footer Styling */
+    background-color: var(--card-bg-color); /* Card background */
+    border-radius: 18px; /* Rounded corners */
+    box-shadow: var(--box-shadow); /* Shadow effect */
+    padding: 18px; /* Padding inside card */
+    max-width: 240px; /* Max width for responsiveness */
+    margin: 0 auto; /* Center align card */
+}
+
+.footer-card p {
+    /* Paragraph inside Footer Card */
+    font-size: 15px; /* Font size */
+    color: #666; /* Text color */
+}
+
+.Btn {
+    display: flex;
+    align-items: center; /* Center align items vertically */
+    justify-content: flex-start; /* Align items to the left */
+    width: 45px; /* Fixed width */
+    height: 45px; /* Fixed height */
+    border: none; /* Remove default border */
+    border-radius: 50%; /* Circular button */
+    cursor: pointer; /* Pointer cursor */
+    position: relative; /* Position relative for absolute children */
+    overflow: hidden; /* Hide overflow content */
+    transition-duration: 0.3s; /* Smooth transition effect */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199); /* Shadow effect */
+    background-color: white; /* Background color */
+}
+
+.sign {
+    width: 100%; /* Full width */
+    transition-duration: 0.3s; /* Smooth transition effect */
+    display: flex;
+    align-items: center; /* Center align items vertically */
+    justify-content: center; /* Center align items horizontally */
+}
+
+.sign svg {
+    width: 17px; /* Width of the SVG */
+}
+
+.sign svg path {
+    fill: black; /* Fill color for SVG path */
+}
+
+/* Text inside the button */
+.text {
+    position: absolute; /* Absolute positioning for animation */
+    right: 0%; /* Align to the right */
+    width: 0%; /* Initial width */
+    opacity: 0; /* Initial opacity */
+    color: white; /* Text color */
+    font-size: 1.2em; /* Font size */
+    font-weight: 700; /* Font weight */
+    transition-duration: 0.3s; /* Smooth transition effect */
+}
+
+/* Hover effect for button */
+.Btn:hover {
+    background-color: black; /* Dark background on hover */
+    width: 155px; /* Expanded width */
+    border-radius: 40px; /* Rounded corners on hover */
+}
+
+.Btn:hover .sign {
+    width: 30%; /* Expanded width for sign */
+    transition-duration: 0.3s; /* Smooth transition effect */
+    padding-left: 20px; /* Padding on left */
+}
+
+.Btn:hover .sign svg path {
+    fill: white; /* Change color of SVG path on hover */
+}
+
+.Btn:hover .text {
+    opacity: 1; /* Full opacity */
+    width: 65%; /* Expanded width for text */
+    transition-duration: 0.3s; /* Smooth transition effect */
+    padding-right: 10px; /* Padding on right */
+}
+
+.Btn:active {
+    transform: translate(2px, 2px); /* Slight move effect */
+}
+
+main {
+    padding: 20px;
+}
+
+canvas {
+    max-width: 100%;
+    height: 400px;
+}
+/* Định nghĩa màu sắc cho từng mùa */
+.spring { background-color: #90EE90; }   /* Màu xanh lục nhạt cho mùa Xuân */
+.summer { background-color: #FFD700; }   /* Màu vàng tươi cho mùa Hạ */
+.autumn { background-color: #FF8C00; }   /* Màu cam đậm cho mùa Thu */
+.winter { background-color: #87CEEB; }   /* Màu xanh trời nhạt cho mùa Đông */
+
+/* Định dạng lại cho phần giao diện mùa */
+#seasonLabel {
+    font-size: 24px;
+    margin: 20px 0;
+}
+#description {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Hiệu ứng bông tuyết rơi cho mùa Đông */
+.snowflake {
+    position: absolute;
+    top: -10px;
+    z-index:1000;
+    color: white;
+    font-size: 24px;
+    animation: snow 20s linear infinite;
+}
+  
+@keyframes snow {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(2000vh); }
+}
+  
+/* Hiệu ứng hoa cho từng mùa */
+.flower-spring, .flower-summer, .flower-autumn {
+    position: absolute;
+    top: -10px;
+    z-index: 500;
+    animation: flowerfall 1s linear infinite;
+}
+
+/* Định nghĩa các kiểu hoa khác nhau */
+.flower-spring {
+    color: pink; /* Hoa mùa Xuân */
+    font-size: 30px;
+}
+.flower-summer {
+    color: yellow; /* Hoa mùa Hạ */
+    font-size: 30px;
+}
+.flower-autumn {
+    color: brown; /* Lá mùa Thu */
+    font-size: 30px;
+}
+
+@keyframes flowerfall {
+    0% {
+        transform: translateY(0) translateX(0); /* Bắt đầu ở vị trí ban đầu */
+        opacity: 1; /* Bắt đầu với độ trong suốt 100% */
+    }
+    20% {
+        transform: translateY(35vh) translateX(-5vw); /* Rơi xuống nhẹ nhàng sang trái */
+    }
+    40% {
+        transform: translateY(60vh) translateX(5vw); /* Rơi xuống sang phải */
+    }
+    60% {
+        transform: translateY(80vh) translateX(-10vw); /* Rơi xuống và dịch sang trái */
+        opacity: 0.9;
+    }
+    80% {
+        transform: translateY(100vh) translateX(10vw); /* Rơi xuống gần cuối và dịch sang phải */
+        opacity: 0.7;
+    }
+    90% {
+        transform: translateY(110vh) translateX(-10vw); /* Rơi xuống gần cuối và dịch sang phải */
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(140vh) translateX(0); /* Kết thúc ở đáy với không dịch chuyển */
+        opacity: 0; /* Dần mờ đi khi đến đáy */
+    }
+}

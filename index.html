@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+</head>
+<body>
+    <header>
+        <h1>Dashboard Smart Home</h1>
+        <button class="Btn" onclick="window.location.href='/logout';">
+            <div class="sign">
+                <svg viewBox="0 0 512 512">
+                    <path
+                        d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"
+                    ></path>
+                </svg>
+            </div>
+            <div class="text">Logout</div>
+        </button>
+    </header>    
+    <div class="content">
+        <div class="block">
+            <h3>Điều khiển thiết bị</h3>
+            <button class="button button-on" onclick="controlRelay('on')">Bật thiết bị</button>
+            <button class="button button-off" onclick="controlRelay('off')">Tắt thiết bị</button>
+            <div class="status" id="relayStatus">Trạng thái thiết bị hiện tại: <span id="relayStatus">Đang cập nhật...</span></div>
+            <div id="icon-container">
+                <img id="icon" src="light_off.png" alt="" width="90" height="90">
+            </div>
+            
+        </div>
+        <div class="block">
+            <h3>Điều khiển đèn RGB</h3>
+            <input type='text' id='rgbScheme' placeholder='Nhập hiệu ứng'>
+            <button class='button button-on' onclick='setRgbScheme()'>Đổi hiệu ứng</button>
+            <div class="button-group">
+                <button class='button button-on' onclick='toggleRgbPower("on")'>Bật Led RGB</button>
+                <button class='button button-off' onclick='toggleRgbPower("off")'>Tắt Led RGB</button>
+            </div>
+            <input type='range' min='0' max='100' step='1' onchange='setRgbDimmer(this.value)'>
+            <div class='status' id='rgbStatus'>Trạng thái đèn RGB hiện tại: OFF</div>
+        </div>
+        <div class="block">
+            <h3>Màn hình LCD</h3>
+            <button class='button button-on' onclick='updateTempHumidity()'>Hiển thị nhiệt độ / độ ẩm lên LCD</button>
+            <div id="lcd-display">
+                <img id="lcd" src="lcd.png" alt="" width="130" height="130">
+            </div>
+            <form id="lcdForm">
+                <input type="text" name="message" placeholder="Nhập nội dung muốn hiển thị trên LCD" required>
+                <input type="submit" value="Gửi">
+            </form>
+            
+            <div id="response"></div>
+            <script>
+                document.getElementById("lcdForm").onsubmit = function(event) {
+                    event.preventDefault(); 
+                
+                    const formData = new FormData(this);
+                    
+                    fetch("/lcdMessage", {
+                        method: "POST",
+                        body: formData
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("response").innerText = data; 
+                    })
+                    .catch(error => console.error('Error:', error));
+                };
+            </script>
+        </div>
+        <div class="block">
+            <h3>Thời tiết hiện tại</h3>
+            <div id="rainAlert">
+                <p>Trạng thái bầu trời: <span id="rainStatus">Đang cập nhật...</span></p>
+            </div>
+            <div id="icon-rain1">
+                <img id="icon-rain" src="sun.png" alt="" width="80" height="80">
+            </div>  
+        </div>
+        <div class="block">
+            <h3>Cập nhật Firmware</h3>
+            <button class='button button-on' onclick='updateFirmware()'>Cập nhật Firmware</button>
+            <div id="firmware">
+                <img id="board" src="board.png" alt="" width="90" height="90" ;>
+                <style>
+                    #firmware {
+                        margin-top: 20px; 
+                    }
+                </style>
+            </div>
+        </div>
+        <div class="block">
+            <h3>Chuyển đổi Mùa</h3>
+            <div id="seasonLabel">Mùa Xuân</div>
+            <div id="description">Một mùa đầy hoa và sự sống nở rộ!</div>
+            <button class="button button-on" onclick="changeSeason()">Chuyển Mùa</button>
+            <button class="button button-toggle" id="toggleSeasonButton" onclick="toggleSeasonEffects()">Tắt/Bật Hiệu ứng Chuyển Mùa</button>
+        </div>
+        <main>
+            <h2>Nhiệt độ & Độ ẩm</h2>
+            <canvas id="tempHumidityChart" width="400" height="200"></canvas> 
+        </main>
+    </div>
+    <footer>
+        <div class="footer-card">
+            <p>Created by Nguyễn Ngọc Tú</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+    
+    <script>
+        var ctx = document.getElementById('tempHumidityChart').getContext('2d');
+
+        // Initialize the chart
+        var tempHumidityChart = new Chart(ctx, {
+            type: 'line', // Line chart for continuous data
+            data: {
+                labels: [], // Time labels (will be updated dynamically)
+                datasets: [
+                    {
+                        label: 'Temperature (°C)', // Dataset for temperature
+                        borderColor: 'rgba(255, 99, 132, 1)', // Red color for temperature line
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)', // Light red for the fill
+                        data: [], // Temperature data
+                        fill: true
+                    },
+                    {
+                        label: 'Humidity (%)', // Dataset for humidity
+                        borderColor: 'rgba(54, 162, 235, 1)', // Blue color for humidity line
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)', // Light blue for the fill
+                        data: [], // Humidity data
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Time'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Value'
+                        }
+                    }
+                }
+            }
+        });
+
+       
+        function updateChartData(time, temperature, humidity) {
+            tempHumidityChart.data.labels.push(time);
+            tempHumidityChart.data.datasets[0].data.push(temperature); 
+            tempHumidityChart.data.datasets[1].data.push(humidity);
+
+            tempHumidityChart.update(); 
+        }
+
+       
+        updateChartData('12:00', 25, 80); 
+    </script>
+    <audio id="buttonSound" src="sound.mp3" preload="auto"></audio>
+</body>
+</html>
